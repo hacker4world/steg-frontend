@@ -1,0 +1,59 @@
+<div class="main">
+  <div class="navbar">
+    <div class="icon" style="width: 50% !important">
+      <h3 class="logo">Direction centrale de l'informatique STEG</h3>
+    </div>
+
+    <div class="menu">
+      <ul>
+        <li>
+          <a
+            href="historique.html"
+            routerLink="/historique"
+            style="color: black !important"
+            >Historique</a
+          >
+        </li>
+        <li>
+          <a routerLink="/reglements" style="color: black !important"
+            >Règlement</a
+          >
+        </li>
+        <li>
+          <a routerLink="/demande" style="color: black !important"
+            >Demander stage</a
+          >
+        </li>
+        <li *ngIf="!loggedIn">
+          <a routerLink="/signin" style="color: black !important"
+            >Se connecter</a
+          >
+        </li>
+
+        <li *ngIf="loggedIn">
+          <a (click)="logout()" style="color: black !important; cursor: pointer"
+            >Fermer compte</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="content">
+    <h1>
+      Société tunisienne <br /><span>de l'électricité</span> <br />Et du gaz
+    </h1>
+    <p class="par" style="color: black !important">
+      La Société tunisienne de l'électricité et du gaz (arabe : الشركة التونسية
+      للكهرباء و الغاز) ou<br />
+      STEG est une société tunisienne de droit public à caractère non
+      administratif.<br />
+      Créée en 1962, elle a pour mission la production et la distribution de
+      l'électricité et du gaz naturel<br />
+      sur le territoire tunisien. La STEG est la deuxième plus grande entreprise
+      tunisienne par<br />
+      son chiffre d'affaires en 2012.
+    </p>
+
+    <button class="cn"><a routerLink="signin">Demande de stage</a></button>
+  </div>
+</div>

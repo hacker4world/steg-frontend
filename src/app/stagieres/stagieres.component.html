@@ -1,0 +1,370 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">remove_red_eye</i>
+            </div>
+            <p class="card-category">Initiation</p>
+            <h3 class="card-title">{{ nombreStagieres.init }}</h3>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">apps</i>
+            </div>
+            <p class="card-category">Perfectionnement</p>
+            <h3 class="card-title">{{ nombreStagieres.perf }}</h3>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">school</i>
+            </div>
+            <p class="card-category">PFE</p>
+            <h3 class="card-title">{{ nombreStagieres.pfe }}</h3>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <mat-form-field style="margin-right: 12px">
+                <mat-label>Institut</mat-label>
+                <mat-select
+                  #selectIns
+                  (selectionChange)="changerInstitut(selectIns.value)"
+                >
+                  <mat-option value="tous">Tous</mat-option>
+                  <mat-option
+                    *ngFor="let institut of listInstituts"
+                    [value]="institut"
+                    >{{ institut }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </li>
+            <li class="nav-item">
+              <mat-form-field style="margin-right: 12px">
+                <mat-label>Type de stage</mat-label>
+                <mat-select
+                  #selectType
+                  (selectionChange)="changerTypeStage(selectType.value)"
+                >
+                  <mat-option value="tous">Tous</mat-option>
+                  <mat-option value="initiation">Initiation</mat-option>
+                  <mat-option value="perfectionnement"
+                    >Perfectionnement</mat-option
+                  >
+                  <mat-option value="pfe">PFE</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </li>
+            <li class="nav-item" style="margin-right: 12px"></li>
+            <li class="nav-item" style="margin-right: 12px"></li>
+          </ul>
+        </div>
+        <div class="justify-content-end" style="display: flex">
+          <mat-form-field class="example-full-width" style="margin-right: 15px">
+            <input
+              #nomSelect
+              (change)="rechercherParNom(nomSelect.value)"
+              matInput
+              type="text"
+              placeholder="Rechercher par nom"
+            />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input
+              #cinSelect
+              (change)="rechercherParCodeIdendite(cinSelect.value)"
+              matInput
+              type="text"
+              placeholder="Rechercher par CIN"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </nav>
+    <br /><br />
+
+    <div style="display: flex; justify-content: center; flex-wrap: wrap">
+      <table class="table">
+        <thead class="text-danger">
+          <th>Nom et prenom</th>
+          <th>Institut</th>
+          <th>Type de stage</th>
+          <th>Num telephone</th>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let stagiere of listeStagieres"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            class="tablerow"
+            (click)="afficherStagiere(stagiere.idStagiere)"
+          >
+            <td>{{ stagiere.nom }} {{ stagiere.prenom }}</td>
+            <td>{{ stagiere.institut }}</td>
+            <td>{{ stagiere.typeStage }}</td>
+            <td>{{ stagiere.numTel }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  *ngIf="stagiereSelectionne"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content modal-dialog-centered">
+      <div class="card">
+        <div class="card-header card-header-info">
+          <h4 class="card-title">Details du stagiere</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Nom"
+                  [value]="stagiereSelectionne.nom"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Prenom"
+                  [value]="stagiereSelectionne.prenom"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Type de stage"
+                  [value]="stagiereSelectionne.typeStage"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Type identite"
+                  [value]="stagiereSelectionne.pieceIdentite"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="code du piece identite"
+                  [value]="stagiereSelectionne.codeIdentite"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Niveau d'etude"
+                  [value]="stagiereSelectionne.niveauEtude"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Specialite"
+                  [value]="stagiereSelectionne.specialite"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Nationalite"
+                  [value]="stagiereSelectionne.nationalite"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Numero tel"
+                  [value]="stagiereSelectionne.numTel"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Gouvernorat"
+                  [value]="stagiereSelectionne.gouvernorat"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Institut"
+                  [value]="stagiereSelectionne.institut"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  disabled
+                  placeholder="Diplome"
+                  [value]="stagiereSelectionne.diplome"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="date"
+                  disabled
+                  placeholder="Date de debut"
+                  [value]="stagiereSelectionne.dateDebut"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="date"
+                  disabled
+                  placeholder="Date de fin"
+                  [value]="stagiereSelectionne.dateFin"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="number"
+                  placeholder="Jours"
+                  disabled
+                  [value]="stagiereSelectionne.jours"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <input
+                  type="file"
+                  value=""
+                  placeholder="Regular"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-start; flex-wrap: wrap">
+        <button
+          (click)="effacerStagiere(stagiereSelectionne.idStagiere)"
+          class="btn btn-danger"
+          data-dismiss="modal"
+        >
+          Effacer stagiere
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  #stagiereEfface
+  timer="1500"
+  title="Stagiere a ete efface"
+  icon="success"
+  [focusCancel]="true"
+  [timerProgressBar]="true"
+>
+</swal>

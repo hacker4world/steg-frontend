@@ -1,0 +1,252 @@
+<div class="navbar">
+  <div class="icon" style="width: 50% !important">
+    <h2 class="logo" style="margin-bottom: 8px">
+      <a routerLink="/" style="color: #00bcd4"
+        >Direction centrale de l'informatique STEG</a
+      >
+    </h2>
+  </div>
+
+  <div class="menu">
+    <ul>
+      <li>
+        <a
+          href="historique.html"
+          routerLink="/historique"
+          style="color: black !important"
+          >Historique</a
+        >
+      </li>
+      <li>
+        <a routerLink="/reglements" style="color: black !important"
+          >Règlement</a
+        >
+      </li>
+      <li>
+        <a routerLink="/demande" style="color: black !important"
+          >Demander stage</a
+        >
+      </li>
+      <li>
+        <a (click)="logout()" style="color: black !important; cursor: pointer"
+          >Fermer compte</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+<br /><br />
+<div style="display: flex; justify-content: center">
+  <div class="card" style="width: 60%">
+    <div class="card-header card-header-info">
+      <h4 class="card-title">Creation du demande de stage</h4>
+      <p class="card-category">Tous les champs sont obligatoires</p>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="nom" type="text" placeholder="Nom" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="prenom"
+              type="text"
+              placeholder="Prenom"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field style="margin-right: 12px">
+            <mat-label>Type de stage</mat-label>
+            <mat-select [(ngModel)]="typeStage">
+              <mat-option value="initiation" selected>Initiation</mat-option>
+              <mat-option value="perfectionnement">Perfectionnement</mat-option>
+              <mat-option value="pfe">PFE</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field style="margin-right: 12px">
+            <mat-label>Piece identite</mat-label>
+            <mat-select [(ngModel)]="pieceIdentite">
+              <mat-option value="cin" selected>Carte identite</mat-option>
+              <mat-option value="passport">Passport</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="codeIdentite"
+              type="text"
+              placeholder="code du piece identite"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="niveauEtude"
+              type="text"
+              placeholder="Niveau d'etude"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field style="margin-right: 12px">
+            <mat-label>Specialite</mat-label>
+            <mat-select [(ngModel)]="specialite">
+              <mat-option value="DSI" selected
+                >Development systemes informations</mat-option
+              >
+              <mat-option value="SEM">Systemes embarques</mat-option>
+              <mat-option value="RSI">Reseau</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="nationalite"
+              type="text"
+              placeholder="Nationalite"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="numTel"
+              type="text"
+              placeholder="Numero telephone"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="gouvernorat"
+              type="text"
+              placeholder="Gouvernorat"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="institut"
+              type="text"
+              placeholder="Institut"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="diplome"
+              type="text"
+              placeholder="Diplome"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="dateDebut"
+              type="date"
+              placeholder="Date de debut"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="dateFin"
+              type="date"
+              placeholder="Date de fin"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [(ngModel)]="jours"
+              type="number"
+              placeholder="Jours"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <input
+              type="file"
+              value=""
+              placeholder="Regular"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <label class="form-check-label" style="margin-left: 15px">
+        <input
+          #accep
+          (change)="accepterReglements(accep.checked)"
+          class="form-check-input"
+          type="checkbox"
+          value=""
+        />
+        J'accepte les reglements internes de l'entreprise
+        <span class="form-check-sign">
+          <span class="check"></span>
+        </span>
+      </label>
+      <p style="color: red">{{ erreur }}</p>
+      <div style="display: flex; justify-content: center">
+        <button class="btn btn-info" (click)="envoyerDemande()">
+          Envoyer demande
+        </button>
+        <br />
+      </div>
+      <br />
+      <p style="text-align: center">
+        Deja appliqué pour un stage ?
+        <a routerLink="/espace-stagiere"> Espace stagiere</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<swal
+  #dialog
+  timer="1500"
+  title="Votre demande a ete envoye"
+  icon="success"
+  [focusCancel]="true"
+  [timerProgressBar]="true"
+>
+</swal>

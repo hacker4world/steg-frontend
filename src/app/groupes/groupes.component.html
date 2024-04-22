@@ -1,0 +1,365 @@
+<br /><br /><br /><br />
+
+<div style="display: flex; justify-content: center">
+  <button
+    type="button"
+    class="btn btn-info"
+    data-toggle="modal"
+    data-target="#exampleModal"
+  >
+    <i class="material-icons">add</i>
+    Creer nouveau groupe
+  </button>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content modal-dialog-centered">
+      <div class="card">
+        <div class="card-header card-header-info">
+          <h4 class="card-title">Creer un nouveau groupe</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  [(ngModel)]="nomGroupe"
+                  placeholder="Nom du groupe"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <mat-form-field class="example-full-width">
+                <input
+                  [(ngModel)]="stagierePourAjouter.nom"
+                  matInput
+                  placeholder="Nom du stagiere"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="example-full-width">
+                <input
+                  [(ngModel)]="stagierePourAjouter.prenom"
+                  matInput
+                  placeholder="Prenom du stagiere"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="example-full-width">
+                <input
+                  [(ngModel)]="stagierePourAjouter.numTel"
+                  matInput
+                  placeholder="Tel"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <button
+                mat-mini-fab
+                color="info"
+                aria-label="Example icon button with a menu icon"
+                (click)="ajouterMembre()"
+              >
+                <i class="material-icons">add</i>
+              </button>
+            </div>
+          </div>
+          <br />
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Tel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let membre of membresPourAjouter">
+                <td>{{ membre.nom }}</td>
+                <td>{{ membre.prenom }}</td>
+                <td>{{ membre.numTel }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-start; flex-wrap: wrap">
+        <button
+          class="btn btn-info"
+          data-dismiss="modal"
+          style="margin-right: 10px"
+          (click)="creerGroupe()"
+        >
+          <i class="material-icons">add</i>
+          Creer groupe
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<br /><br />
+<div style="display: flex; justify-content: center">
+  <table class="table" style="width: 95%">
+    <thead class="text-danger">
+      <th>Nom du groupe</th>
+    </thead>
+    <tbody>
+      <tr
+        data-toggle="modal"
+        data-target="#exampleModal2"
+        class="tablerow"
+        *ngFor="let groupe of groupes"
+        (click)="changerGroupe(groupe.idGroupe)"
+      >
+        <td>
+          {{ groupe.nom }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  *ngIf="groupeSelectionne"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content modal-dialog-centered">
+      <div class="card">
+        <div class="card-header card-header-info">
+          <h4 class="card-title">{{ groupeSelectionne.nom }}</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  placeholder="Nom du groupe"
+                  [(ngModel)]="groupeNom"
+                  [value]="groupeSelectionne.nom"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <p>Membres du groupe :</p>
+          <table class="table">
+            <thead class="text-danger">
+              <td>Nom</td>
+              <td>Prenom</td>
+              <td>Tel</td>
+              <td>Actions</td>
+            </thead>
+            <tbody>
+              <tr *ngFor="let membre of groupeMembres">
+                <td>{{ membre.nom }}</td>
+                <td>{{ membre.prenom }}</td>
+                <td>{{ membre.numTel }}</td>
+                <td style="display: flex">
+                  <div class="example-button-container">
+                    <button
+                      mat-mini-fab
+                      color="warn"
+                      aria-label="Example icon button with a menu icon"
+                      (click)="effacerMembre(membre.idMembre)"
+                    >
+                      <i class="material-icons">clear</i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <label class="form-check-label" style="margin-left: 15px">
+            <input
+              (change)="afficherTaches(checkT.checked)"
+              #checkT
+              class="form-check-input"
+              type="checkbox"
+              value=""
+            />
+            Afficher taches
+            <span class="form-check-sign">
+              <span class="check"></span>
+            </span>
+          </label>
+          <br />
+          <div class="card" *ngIf="tachesAffiche">
+            <div class="card-header card-header-info">
+              <h4 class="card-title">Taches du groupe</h4>
+            </div>
+            <div class="card-body">
+              <button
+                type="button"
+                class="btn btn-info"
+                data-toggle="modal"
+                data-target="#tacheModal"
+              >
+                Ajouter tache
+              </button>
+              <table class="table">
+                <tbody>
+                  <tr *ngFor="let tache of groupeTaches">
+                    <td>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            checked
+                          />
+                          <span class="form-check-sign">
+                            <span class="check"></span>
+                          </span>
+                        </label>
+                      </div>
+                    </td>
+                    <td>{{ tache.description }}</td>
+                    <td class="td-actions text-right">
+                      <button
+                        mat-raised-button
+                        type="button"
+                        matTooltip="Remove"
+                        [matTooltipPosition]="'above'"
+                        class="btn btn-danger btn-link btn-sm btn-just-icon"
+                        (click)="supprimerTache(tache.idTache)"
+                      >
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-start; flex-wrap: wrap">
+        <button
+          class="btn btn-info"
+          data-dismiss="modal"
+          style="margin-right: 10px"
+          (click)="modifierNomGroupe()"
+        >
+          <i class="material-icons">done</i>
+          Appliquer changements
+        </button>
+        <button
+          (click)="supprimerGroupe(groupeSelectionne.idGroupe)"
+          class="btn btn-danger"
+          data-dismiss="modal"
+        >
+          <i class="material-icons">clear</i>
+          Effacer groupe
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="tacheModal"
+  tabindex="-1"
+  aria-labelledby="tacheModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title">Ajouter tache</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Tache" [(ngModel)]="nomTache" />
+                </mat-form-field>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    type="date"
+                    placeholder="Date limite"
+                    [(ngModel)]="dateTache"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <br />
+            <div style="display: flex; justify-content: center">
+              <button class="btn btn-info" (click)="ajouterTache()">
+                Ajouter tache
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  #groupeCree
+  title="Groupe a ete creé"
+  timer="1500"
+  icon="success"
+  [focusCancel]="true"
+  [timerProgressBar]="true"
+>
+</swal>
+
+<swal
+  #groupeModifie
+  title="Groupe a ete modifié"
+  timer="1500"
+  icon="success"
+  [focusCancel]="true"
+  [timerProgressBar]="true"
+>
+</swal>
+
+<swal
+  #groupeEfface
+  title="Groupe a ete supprime"
+  timer="1500"
+  icon="success"
+  [focusCancel]="true"
+  [timerProgressBar]="true"
+>
+</swal>
+
+<swal
+  #tacheAjoute
+  title="Tache a ete ajoute"
+  timer="1500"
+  icon="success"
+  [focusCancel]="true"
+  [timerProgressBar]="true"
+>
+</swal>

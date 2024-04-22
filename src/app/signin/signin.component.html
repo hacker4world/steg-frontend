@@ -1,0 +1,23 @@
+<form class="form">
+  <p class="form-title">Sign in to your account</p>
+  <div *ngIf="alertMessage" class="alert alert-danger" role="alert">
+    {{ alertMessage }}
+  </div>
+  <br />
+  <div class="input-container">
+    <input type="email" placeholder="Enter email" [(ngModel)]="email" />
+    <span></span>
+  </div>
+  <div class="input-container">
+    <input
+      type="password"
+      placeholder="Enter password"
+      [(ngModel)]="password"
+    />
+  </div>
+  <button type="submit" class="submit" (click)="login()">Sign in</button>
+  <p class="signup-link">
+    No account?
+    <a routerLink="/register">Sign up</a>
+  </p>
+</form>

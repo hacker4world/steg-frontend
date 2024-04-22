@@ -1,0 +1,75 @@
+<br />
+<br /><br />
+
+<div style="display: flex; justify-content: center">
+  <div class="card" style="width: 75%">
+    <div class="card-header card-header-icon card-header-info">
+      <div class="card-icon">
+        <i class="material-icons">settings</i>
+      </div>
+      <h4 class="card-title">Parametres de places disponibles</h4>
+    </div>
+    <div class="card-body">
+      <br />
+      <div class="row">
+        <div class="col-md-5">
+          <mat-form-field class="example-full-width">
+            <input
+              type="number"
+              min="1"
+              matInput
+              placeholder="Stages d'initiation"
+              [value]="initiation"
+              [(ngModel)]="initiation"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input
+              type="number"
+              min="1"
+              matInput
+              placeholder="Stages de perfectionnement"
+              [value]="perfectionnement"
+              [(ngModel)]="perfectionnement"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width">
+            <input
+              [value]="pfe"
+              type="number"
+              min="1"
+              matInput
+              placeholder="Stages PFE"
+              [(ngModel)]="pfe"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <br />
+
+      <div style="display: flex; justify-content: center">
+        <button
+          type="button"
+          class="btn btn-info"
+          (click)="appliquerParametres()"
+        >
+          <i class="material-icons">add</i>
+          Appliquer parametres
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  #parametres
+  title="Parametres applique"
+  icon="success"
+  [focusCancel]="true"
+  [timerProgressBar]="true"
+>
+</swal>

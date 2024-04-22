@@ -1,0 +1,388 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">remove_red_eye</i>
+            </div>
+            <p class="card-category">Initiation</p>
+            <h3 class="card-title">{{ nbrDemandes.initiation }}</h3>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">apps</i>
+            </div>
+            <p class="card-category">Perfectionnement</p>
+            <h3 class="card-title">{{ nbrDemandes.perfectionnement }}</h3>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">school</i>
+            </div>
+            <p class="card-category">PFE</p>
+            <h3 class="card-title">{{ nbrDemandes.pfe }}</h3>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <mat-form-field style="margin-right: 12px">
+                <mat-label>Institut</mat-label>
+                <mat-select
+                  #select
+                  (selectionChange)="changerInstitut(select.value)"
+                >
+                  <mat-option value="tous">Tous</mat-option>
+                  <mat-option
+                    *ngFor="let institut of institus"
+                    [value]="institut"
+                    >{{ institut }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </li>
+            <li class="nav-item">
+              <mat-form-field style="margin-right: 12px">
+                <mat-label>Type de stage</mat-label>
+                <mat-select
+                  #selectType
+                  (selectionChange)="changerType(selectType.value)"
+                >
+                  <mat-option value="tous">Tous</mat-option>
+                  <mat-option value="initiation">Initiation</mat-option>
+                  <mat-option value="perfectionnement"
+                    >Perfectionnement</mat-option
+                  >
+                  <mat-option value="pfe">PFE</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </li>
+            <li class="nav-item" style="margin-right: 12px"></li>
+            <li class="nav-item" style="margin-right: 12px"></li>
+          </ul>
+        </div>
+        <div class="justify-content-end" style="display: flex">
+          <mat-form-field class="example-full-width" style="margin-right: 15px">
+            <input
+              #input
+              (change)="rechercherParNom(input.value)"
+              matInput
+              type="text"
+              placeholder="Rechercher par nom"
+            />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input
+              #codeInput
+              (change)="rechercherParCodeIdendite(codeInput.value)"
+              matInput
+              type="text"
+              placeholder="Rechercher par CIN"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </nav>
+    <br />
+    <div style="display: flex; justify-content: center; flex-wrap: wrap">
+      <table class="table">
+        <thead class="text-danger">
+          <th>Nom et prenom</th>
+          <th>Institut</th>
+          <th>Type de stage</th>
+          <th>Num telephone</th>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let demande of demandes"
+            class="tablerow"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            (click)="changerDemande(demande.idDemande)"
+          >
+            <td>{{ demande.nom }} {{ demande.prenom }}</td>
+            <td>{{ demande.institut }}</td>
+            <td>{{ demande.typeStage }}</td>
+            <td>{{ demande.numTel }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  *ngIf="demandeSelectionne"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content modal-dialog-centered">
+      <div class="card">
+        <div class="card-header card-header-info">
+          <h4 class="card-title">Details du demande</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Nom"
+                  [value]="demandeSelectionne.nom"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Prenom"
+                  [value]="demandeSelectionne.prenom"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Type de stage"
+                  [value]="demandeSelectionne.typeStage"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Type identite"
+                  [value]="demandeSelectionne.pieceIdentite"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="code du piece identite"
+                  [value]="demandeSelectionne.codeIdentite"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Niveau d'etude"
+                  [value]="demandeSelectionne.niveauEtude"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Specialite"
+                  [value]="demandeSelectionne.specialite"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Nationalite"
+                  [value]="demandeSelectionne.nationalite"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Numero tel"
+                  [value]="demandeSelectionne.numTel"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Gouvernorat"
+                  [value]="demandeSelectionne.gouvernorat"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Institut"
+                  [value]="demandeSelectionne.institut"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="text"
+                  placeholder="Diplome"
+                  [value]="demandeSelectionne.diplome"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="date"
+                  placeholder="Date de debut"
+                  [value]="demandeSelectionne.dateDebut"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="date"
+                  placeholder="Date de fin"
+                  [value]="demandeSelectionne.dateFin"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  disabled
+                  matInput
+                  type="number"
+                  placeholder="Jours"
+                  [value]="demandeSelectionne.jours"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <input
+                  disabled
+                  type="file"
+                  value=""
+                  placeholder="Regular"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-start; flex-wrap: wrap">
+        <button
+          class="btn btn-success"
+          data-dismiss="modal"
+          (click)="accepterDemande(demandeSelectionne.idDemande)"
+          style="margin-right: 10px"
+        >
+          Accepter
+        </button>
+        <button
+          class="btn btn-danger"
+          data-dismiss="modal"
+          (click)="refuserDemande(demandeSelectionne.idDemande)"
+        >
+          Refuser
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  #demandeAccepte
+  timer="1500"
+  title="Stagiere a ete accepté"
+  icon="success"
+  [focusCancel]="true"
+  [timerProgressBar]="true"
+>
+</swal>
+
+<swal
+  #demandeRefuse
+  timer="1500"
+  title="Stagiere a ete refusé"
+  icon="success"
+  [focusCancel]="true"
+  [timerProgressBar]="true"
+>
+</swal>

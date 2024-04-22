@@ -1,0 +1,90 @@
+<div class="navbar">
+  <div class="icon" style="width: 50% !important">
+    <h2 class="logo">
+      <a routerLink="/" style="color: #00bcd4"
+        >Direction centrale de l'informatique STEG</a
+      >
+    </h2>
+  </div>
+
+  <div class="menu">
+    <ul>
+      <li>
+        <a
+          href="historique.html"
+          routerLink="/historique"
+          style="color: black !important"
+          >Historique</a
+        >
+      </li>
+      <li>
+        <a routerLink="/reglements" style="color: black !important"
+          >Règlement</a
+        >
+      </li>
+      <li>
+        <a routerLink="/demande" style="color: black !important"
+          >Demander stage</a
+        >
+      </li>
+      <li *ngIf="!loggedIn">
+        <a routerLink="/signin" style="color: black !important">Se connecter</a>
+      </li>
+      <li *ngIf="loggedIn">
+        <a (click)="logout()" style="color: black !important; cursor: pointer"
+          >Fermer compte</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+  <h1>Règlement de Stage</h1>
+  <section>
+    <h2>Règles à respecter en entreprise:</h2>
+    <br />
+
+    Horaires<br />
+    Discipline<br />
+    Règles de sécurité<br />
+    Règles d'hygiène<br />
+  </section>
+  <br />
+
+  <section>
+    <h2>Règles à respecter dans l'entreprise</h2>
+    <p>
+      Le stagiaire doit se conformer aux règles et au règlement intérieur de
+      l'entreprise.
+    </p>
+  </section>
+  <br />
+
+  <section>
+    <h2>Rapport de Stage</h2>
+    <p>
+      À la fin de la période en entreprise, le stagiaire doit rédiger un rapport
+      de stage. Ce rapport sera soumis et évalué par le responsable des études
+      au sein de son établissement.
+    </p>
+  </section>
+  <br />
+  <section>
+    <h2>Bourse d'encouragement</h2>
+    <p>
+      La Société Tunisienne de l'Électricité et du Gaz (STEG) offre actuellement
+      une bourse d'encouragement destinée à soutenir les stagiaires impliqués
+      dans des projets axés sur l'efficacité énergétique. Cette initiative
+      reflète l'engagement de la STEG envers la formation des futurs leaders de
+      l'industrie énergétique, en fournissant aux jeunes talents les ressources
+      financières nécessaires pour leurs travaux de recherche.
+    </p>
+  </section>
+</div>
+<footer>
+  <p>
+    &copy; 2024 Société tunisienne de l'électricité Et du gaz. Tous droits
+    réservés.
+  </p>
+</footer>

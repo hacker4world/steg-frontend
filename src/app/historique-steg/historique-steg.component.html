@@ -1,0 +1,85 @@
+<div class="navbar">
+  <div class="icon" style="width: 50% !important">
+    <h2 class="logo">
+      <a routerLink="/" style="color: #00bcd4"
+        >Direction centrale de l'informatique STEG</a
+      >
+    </h2>
+  </div>
+
+  <div class="menu">
+    <ul>
+      <li>
+        <a
+          href="historique.html"
+          routerLink="/historique"
+          style="color: black !important"
+          >Historique</a
+        >
+      </li>
+      <li>
+        <a routerLink="/reglements" style="color: black !important"
+          >Règlement</a
+        >
+      </li>
+      <li>
+        <a routerLink="/demande" style="color: black !important"
+          >Demander stage</a
+        >
+      </li>
+      <li *ngIf="!loggedIn">
+        <a routerLink="/signin" style="color: black !important">Se connecter</a>
+      </li>
+      <li *ngIf="loggedIn">
+        <a (click)="logout()" style="color: black !important; cursor: pointer"
+          >Fermer compte</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+
+<section id="history">
+  <h2>Historique</h2>
+  <p>
+    jusqu'en août 1959, l'industrie électrique tunisienne est répartie entre
+    huit sociétés différentes. Ayant décidé de prendre provisoirement en charge
+    ces sociétés, l'État tunisien place, le 15 août 1958, un comité de gestion à
+    la tête de l'une de ces sociétés connue sous le nom de Compagnie tunisienne
+    d'électricité et transports. Par le décret-loi n°62-8 du 3 avril 1962,
+    l'État met fin à cette situation en créant un monopole public confié à la
+    STEG. Peu après, une politique d'électrification est mise en place qui, en
+    une quarantaine d'années, fait passer le taux d'électrification urbain de 20
+    % à près de 100 % et le taux d'électrification rural de 6 % à 99 %.
+  </p>
+</section>
+
+<section id="Transport">
+  <h2>Transport</h2>
+  la STEG gère le transport de tout le réseau national électrique qui comporte
+  73 postes HT, 5 593 kilomètres de lignes HT, cinq lignes d'interconnexion avec
+  l'Algérie et deux lignes d'interconnexion avec la Libye. Pour le gaz naturel,
+  la STEG dispose de 2 100 kilomètres (sans le transtunisien) pour le transport
+  inter-régional
+</section>
+<section id="destribution">
+  <h2>Distribution</h2>
+  La STEG exploite un réseau électrique de près de 138 798 kilomètres (2008) de
+  lignes moyenne et basse tension. En 2011, le nombre des clients au réseau
+  électrique est évalué à 3,3 millions ; la production électrique annuelle est
+  estimée à 11 902 GWh5. Pour la distribution du gaz, la société dispose de 9
+  500 kilomètres qui permettent d'approvisionner treize centrales électriques,
+  576 unités industrielles, 468 331 ménages et 312 hôtels18. Siège de la STEG.
+  La STEG entretient ses relations avec ses clients à travers 38 districts et 90
+  agences. Elle collecte par ailleurs des impôts pour le compte de l'État, soit
+  la redevance pour la radio et la télévision et la taxe municipale
+</section>
+<br /><br />
+<div class="button-container">
+  <a href="réglemnt.html"><input type="button" value="accepter" /></a>
+  <a href="index.html"><input type="button" value="retour" /></a>
+</div>
+
+<footer>
+  <p>&copy; 2024 STEG - Tous droits réservés.</p>
+</footer>
